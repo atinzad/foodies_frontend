@@ -19,7 +19,7 @@ const Home = () => {
         </div>
         <div className="row">
           {categoryList}
-          {categoryList.length > 0 && (
+          {categoryList.length > 3 && (
             <div className="col-md-3 col-sm-12 py-2">
               <Link
                 to="/categories"
