@@ -1,3 +1,4 @@
+import { observer } from "mobx-react";
 import React from "react";
 import categoryStore from "../stores/categoryStore";
 import AddCategoryModal from "./AddCategoryModal";
@@ -22,4 +23,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default observer(Home);

@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import instance from "./instance";
 
 const categories = [
   {
@@ -29,11 +30,11 @@ const categories = [
 ];
 
 class CategoryStore {
+  categories = [];
+
   constructor() {
     makeAutoObservable(this);
   }
-
-  categories = categories;
 
   //? will modify it after backend
   addCategory = (category) => {
@@ -41,7 +42,13 @@ class CategoryStore {
     this.categories = [...this.categories, category];
     console.log(this.categories);
   };
+
+  getCategory = async () => {
+    const res = await instance.get("/category");
+    this.categories = res.data.payload;
+  };
 }
 
 const categoryStore = new CategoryStore();
+categoryStore.getCategory();
 export default categoryStore;
