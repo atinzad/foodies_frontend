@@ -1,0 +1,35 @@
+.list--item {
+  position: relative;
+}
+
+.list--item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.list--item p {
+  position: absolute;
+  bottom: 10px;
+  color: #333;
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.list--item-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0)
+  );
+}
