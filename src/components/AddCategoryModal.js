@@ -14,7 +14,7 @@ const AddCategoryModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    categoryStore.addCategory(category);
+    categoryStore.addCategory(category, handleClose);
   };
 
   return (

@@ -37,10 +37,15 @@ class CategoryStore {
   }
 
   //? will modify it after backend
-  addCategory = (category) => {
-    category._id = this.categories[this.categories.length - 1]._id + 1;
-    this.categories = [...this.categories, category];
-    console.log(this.categories);
+  addCategory = async (category, handleClose) => {
+    try {
+      const res = await instance.post("/category", category);
+      const newCategory = res.data.payload;
+      this.categories = [...this.categories, newCategory];
+      handleClose();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   getCategory = async () => {
