@@ -9,6 +9,10 @@ const AddCategoryModal = () => {
   const handleClose = () => setIsOpen(false);
   const handleShow = () => setIsOpen(true);
 
+  const handleImage = (event) => {
+    setCategory({ ...category, [event.target.name]: event.target.files[0] });
+  };
+
   const handleChange = (event) =>
     setCategory({ ...category, [event.target.name]: event.target.value });
 
@@ -39,12 +43,7 @@ const AddCategoryModal = () => {
             </InputGroup>
             <InputGroup className="my-3">
               <InputGroup.Text>Image</InputGroup.Text>
-              <Form.Control
-                type="text"
-                placeholder="Image path here"
-                name="image"
-                onChange={handleChange}
-              />
+              <Form.Control type="file" name="image" onChange={handleImage} />
             </InputGroup>
           </Modal.Body>
           <Modal.Footer>
