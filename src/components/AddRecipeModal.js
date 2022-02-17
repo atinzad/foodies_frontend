@@ -49,9 +49,10 @@ const AddRecipeModal = () => {
             <InputGroup className="my-3">
               <InputGroup.Text>Category</InputGroup.Text>
               <Form.Select name="category" onChange={handleChange}>
-                <option selected disabled>
+                <option value="" selected disabled>
                   Select Category
                 </option>
+                <option value="">No Category</option>
                 {categoryStore.categories.map((cat) => (
                   <option key={cat._id} value={cat._id}>
                     {cat.name}
