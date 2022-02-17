@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, InputGroup, Modal } from "react-bootstrap";
+import categoryStore from "../stores/categoryStore";
 import recipeStore from "../stores/recipeStore";
 
 const AddRecipeModal = () => {
@@ -44,6 +45,19 @@ const AddRecipeModal = () => {
             <InputGroup className="my-3">
               <InputGroup.Text>Image</InputGroup.Text>
               <Form.Control type="file" name="image" onChange={handleImage} />
+            </InputGroup>
+            <InputGroup className="my-3">
+              <InputGroup.Text>Category</InputGroup.Text>
+              <Form.Select name="category" onChange={handleChange}>
+                <option selected disabled>
+                  Select Category
+                </option>
+                {categoryStore.categories.map((cat) => (
+                  <option key={cat._id} value={cat._id}>
+                    {cat.name}
+                  </option>
+                ))}
+              </Form.Select>
             </InputGroup>
           </Modal.Body>
           <Modal.Footer>

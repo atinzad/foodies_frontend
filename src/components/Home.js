@@ -34,8 +34,8 @@ const Home = () => {
           <AddCategoryModal />
         </div>
         <div className="row">
-          {categoryList.splice(0, 3)}
-          {categoryList.length > 3 && (
+          {categoryList.slice(0, 3)}
+          {categoryList.length >= 3 && (
             <div className="col-md-3 col-sm-12 py-2">
               <Link
                 to="/categories"
@@ -54,7 +54,7 @@ const Home = () => {
           <AddRecipeModal />
         </div>
         <div className="row">
-          {recipeList.splice(0, 3)}
+          {recipeList.slice(0, 3)}
           {recipeList.length > 3 && (
             <div className="col-md-3 col-sm-12 py-2">
               <Link
@@ -74,7 +74,7 @@ const Home = () => {
           <AddIngredientModal />
         </div>
         <div className="row">
-          {ingredientList.splice(0, 3)}
+          {ingredientList.slice(0, 3)}
           {ingredientList.length > 3 && (
             <div className="col-md-3 col-sm-12 py-2">
               <Link

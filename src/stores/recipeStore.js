@@ -14,7 +14,7 @@ class RecipeStore {
       const formData = new FormData();
       for (const key in recipe) formData.append(key, recipe[key]);
 
-      const res = await instance.post("/recipe", formData);
+      const res = await instance.post(`/recipe/${recipe.category}`, formData);
       const newRecipe = res.data.payload;
       this.recipes = [...this.recipes, newRecipe];
       handleClose();
