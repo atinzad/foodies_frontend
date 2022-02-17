@@ -14,17 +14,17 @@ import recipeStore from "../stores/recipeStore";
 const Home = () => {
   const categoryList = categoryStore.categories
     .map((category) => <CategoryItem key={category._id} category={category} />)
-    .sort(() => Math.random() - 0.5)
-    .splice(0, 3);
-
-  const ingredientList = ingredientStore.ingredients.map((ingredient) => (
-    <IngredientItem key={ingredient._id} ingredient={ingredient} />
-  ));
+    .sort(() => Math.random() - 0.5);
 
   const recipeList = recipeStore.recipes
     .map((recipe) => <RecipeItem key={recipe._id} recipe={recipe} />)
-    .sort(() => Math.random() - 0.5)
-    .splice(0, 3);
+    .sort(() => Math.random() - 0.5);
+
+  const ingredientList = ingredientStore.ingredients
+    .map((ingredient) => (
+      <ingredientItem key={ingredient._id} ingredient={ingredient} />
+    ))
+    .sort(() => Math.random() - 0.5);
 
   return (
     <>
@@ -34,7 +34,7 @@ const Home = () => {
           <AddCategoryModal />
         </div>
         <div className="row">
-          {categoryList}
+          {categoryList.splice(0, 3)}
           {categoryList.length > 3 && (
             <div className="col-md-3 col-sm-12 py-2">
               <Link
@@ -54,7 +54,7 @@ const Home = () => {
           <AddRecipeModal />
         </div>
         <div className="row">
-          {recipeList}
+          {recipeList.splice(0, 3)}
           {recipeList.length > 3 && (
             <div className="col-md-3 col-sm-12 py-2">
               <Link
@@ -74,7 +74,7 @@ const Home = () => {
           <AddIngredientModal />
         </div>
         <div className="row">
-          {ingredientList}
+          {ingredientList.splice(0, 3)}
           {ingredientList.length > 3 && (
             <div className="col-md-3 col-sm-12 py-2">
               <Link
