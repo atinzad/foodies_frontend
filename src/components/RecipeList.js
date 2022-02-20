@@ -8,8 +8,6 @@ import RecipeItem from "./RecipeItem";
 const RecipeList = () => {
   const { categoryId } = useParams();
 
-  console.log(categoryId);
-
   const recipeList = !categoryId
     ? recipeStore.recipes.map((recipe) => (
         <RecipeItem key={recipe._id} recipe={recipe} />

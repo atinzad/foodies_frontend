@@ -24,7 +24,7 @@ class IngredientStore {
 
   getIngredient = async () => {
     const res = await instance.get("/ingredient");
-    this.ingredient = res.data.payload;
+    this.ingredients = res.data.payload;
   };
 }
 

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, InputGroup, Modal } from "react-bootstrap";
 import categoryStore from "../stores/categoryStore";
+import ingredientStore from "../stores/ingredientStore";
 import recipeStore from "../stores/recipeStore";
 
 const AddRecipeModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [recipe, setRecipe] = useState(null);
+  const [chosenIngredients, setChosenIngredients] = useState([]);
 
   const handleClose = () => setIsOpen(false);
   const handleShow = () => setIsOpen(true);
@@ -14,13 +16,32 @@ const AddRecipeModal = () => {
     setRecipe({ ...recipe, [event.target.name]: event.target.files[0] });
   };
 
+  const handleSelect = (event) => {
+    setChosenIngredients([...chosenIngredients, event.target.value]);
+  };
+
+  const handleRemove = (ingredientId) => {
+    setChosenIngredients(chosenIngredients.filter((id) => id !== ingredientId));
+  };
+
   const handleChange = (event) =>
     setRecipe({ ...recipe, [event.target.name]: event.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // console.log("ing", chosenIngredients);
+    // setRecipe({ ...recipe, ingredients: chosenIngredients.slice() });
+    setChosenIngredients([]);
+    console.log("object", recipe);
     recipeStore.addRecipe(recipe, handleClose);
+    setRecipe(null);
   };
+
+  useEffect(() => {
+    setRecipe({ ...recipe, ingredients: chosenIngredients.slice() });
+  }, [chosenIngredients]);
+
+  console.log("recipe:", recipe);
 
   return (
     <>
@@ -60,6 +81,38 @@ const AddRecipeModal = () => {
                 ))}
               </Form.Select>
             </InputGroup>
+            <InputGroup className="my-3">
+              <InputGroup.Text>Ingredients</InputGroup.Text>
+              <Form.Select name="ingredient" onChange={handleSelect}>
+                <option value="" selected>
+                  Select ingredients
+                </option>
+                {ingredientStore.ingredients
+                  .filter(
+                    (ingredient) => !chosenIngredients.includes(ingredient._id)
+                  )
+                  .map((ingredient) => (
+                    <option key={ingredient._id} value={ingredient._id}>
+                      {ingredient.name}
+                    </option>
+                  ))}
+              </Form.Select>
+            </InputGroup>
+            <div className="d-flex gap-3">
+              {ingredientStore.ingredients
+                .filter((ingredient) =>
+                  chosenIngredients.includes(ingredient._id)
+                )
+                .map((ingredient) => (
+                  <button
+                    className="btn btn-primary"
+                    key={ingredient._id}
+                    onClick={() => handleRemove(ingredient._id)}
+                  >
+                    {ingredient.name}
+                  </button>
+                ))}
+            </div>
           </Modal.Body>
           <Modal.Footer>
             <button type="submit" className="btn btn-outline-dark">

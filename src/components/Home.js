@@ -39,14 +39,24 @@ const Home = () => {
     .map((recipe) => <RecipeItem key={recipe._id} recipe={recipe} />)
     .sort(() => Math.random() - 0.5);
 
-  const ingredientList = ingredientStore
+  const ingredientList = ingredientResult
     .map((ingredient) => (
-      <ingredientItem key={ingredient._id} ingredient={ingredient} />
+      <IngredientItem key={ingredient._id} ingredient={ingredient} />
     ))
     .sort(() => Math.random() - 0.5);
 
+  const handleSearch = (e) => {
+    setQuery(e.target.value);
+  };
+
   return (
     <>
+      <input
+        type="text"
+        onChange={handleSearch}
+        placeholder="Search"
+        className="form-control my-3"
+      />
       <div>
         <div className="d-flex justify-content-between align-items-center w-100 py-3">
           <h1 className="m-0">Categories</h1>

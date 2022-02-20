@@ -11,14 +11,17 @@ class RecipeStore {
   //? will modify it after backend
   addRecipe = async (recipe, handleClose) => {
     try {
+      if (recipe.category === "") {
+        delete recipe.category;
+      }
       const formData = new FormData();
       for (const key in recipe) formData.append(key, recipe[key]);
-
       const res = await instance.post(
         `/recipe/${recipe.category ? recipe.category : ""}`,
         formData
       );
       const newRecipe = res.data.payload;
+      console.log("newRecipe", newRecipe);
       this.recipes = [...this.recipes, newRecipe];
       handleClose();
     } catch (error) {
