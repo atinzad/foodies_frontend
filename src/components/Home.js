@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import categoryStore from "../stores/categoryStore";
 import ingredientStore from "../stores/ingredientStore";
@@ -10,17 +10,36 @@ import CategoryItem from "./CategoryItem";
 import RecipeItem from "./RecipeItem";
 import IngredientItem from "./IngredientItem";
 import recipeStore from "../stores/recipeStore";
+import Fuse from "fuse.js";
 
 const Home = () => {
-  const categoryList = categoryStore.categories
+  const [query, setQuery] = useState("des");
+
+  const options = { includeScore: false, keys: ["name"] };
+  const categoryFuse = new Fuse(categoryStore.categories, options);
+  const categoryResult = query
+    ? categoryFuse.search(query).map((item) => item.item)
+    : categoryStore.categories;
+
+  const recipeFuse = new Fuse(recipeStore.recipes, options);
+  const recipeResult = query
+    ? recipeFuse.search(query).map((item) => item.item)
+    : recipeStore.recipes;
+
+  const ingredientFuse = new Fuse(ingredientStore.ingredients, options);
+  const ingredientResult = query
+    ? ingredientFuse.search(query).map((item) => item.item)
+    : ingredientStore.ingredients;
+
+  const categoryList = categoryResult
     .map((category) => <CategoryItem key={category._id} category={category} />)
     .sort(() => Math.random() - 0.5);
 
-  const recipeList = recipeStore.recipes
+  const recipeList = recipeResult
     .map((recipe) => <RecipeItem key={recipe._id} recipe={recipe} />)
     .sort(() => Math.random() - 0.5);
 
-  const ingredientList = ingredientStore.ingredients
+  const ingredientList = ingredientStore
     .map((ingredient) => (
       <ingredientItem key={ingredient._id} ingredient={ingredient} />
     ))
