@@ -14,14 +14,15 @@ import Fuse from "fuse.js";
 
 const Home = () => {
   const [query, setQuery] = useState("");
+  const recipes = recipeStore.getCompanions();
 
-  const options = { includeScore: false, keys: ["name"] };
+  const options = { includeScore: false, keys: ["name", "companion"] };
   const categoryFuse = new Fuse(categoryStore.categories, options);
   const categoryResult = query
     ? categoryFuse.search(query).map((item) => item.item)
     : categoryStore.categories;
 
-  const recipeFuse = new Fuse(recipeStore.recipes, options);
+  const recipeFuse = new Fuse(recipes, options);
   const recipeResult = query
     ? recipeFuse.search(query).map((item) => item.item)
     : recipeStore.recipes;
@@ -38,8 +39,6 @@ const Home = () => {
   const recipeList = recipeResult
     .map((recipe) => <RecipeItem key={recipe._id} recipe={recipe} />)
     .sort(() => Math.random() - 0.5);
-
-  console.log("recipeList in Home", recipeStore.recipes);
 
   const ingredientList = ingredientResult
     .map((ingredient) => (

@@ -25,7 +25,6 @@ class CategoryStore {
 
   getCategory = async () => {
     const res = await instance.get("/category");
-    console.log("res.data.payload", res.data.payload);
     this.categories = res.data.payload;
   };
 }
