@@ -14,11 +14,11 @@ const AddRecipeModal = () => {
   const [ingredient, setIngredient] = useState(null);
 
   const handleIngredientChange = (event) => {
-    setIngredient({ ...ingredient, [event.target.name]: event.target.value });
+    setIngredient({ ...ingredient, name: event.target.value });
   };
 
   const handleIngredientImage = (event) => {
-    setRecipe({ ...ingredient, [event.target.name]: event.target.files[0] });
+    setRecipe({ ...ingredient, image: event.target.files[0] });
   };
 
   const handleClose = () => setIsOpen(false);
@@ -180,10 +180,7 @@ const AddRecipeModal = () => {
                 >
                   ADD Ingredient
                 </button>
-              </>
-
               </div>
-
             )}
           </div>
 
