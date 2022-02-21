@@ -8,6 +8,7 @@ const IngredientList = () => {
   const ingredientList = ingredientStore.ingredients.map((ingredient) => (
     <IngredientItem key={ingredient._id} ingredient={ingredient} />
   ));
+
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center w-100 py-3">

@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import CategoryList from "./components/CategoryList";
 import IngredientList from "./components/IngredientList";
 import RecipeList from "./components/RecipeList";
+import RecipeDetails from "./components/RecipeDetails";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/categories/:categoryId" element={<RecipeList />} />
           <Route path="/ingredients" element={<IngredientList />} />
           <Route path="/recipes" element={<RecipeList />} />
+          <Route path="/recipes/:recipeId" element={<RecipeDetails />} />
         </Routes>
       </div>
     </>
