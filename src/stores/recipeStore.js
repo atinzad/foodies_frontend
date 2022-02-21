@@ -51,7 +51,12 @@ class RecipeStore {
 
   getCompanion = (recipe) => {
     return recipe.ingredients
-      ? recipe.ingredients.map((id) => this.getIngredient(id).name)
+
+     
+      ? recipe.ingredients.map(
+          (id) =>
+            this.getIngredient(id).name
+        )
       : [];
   };
 

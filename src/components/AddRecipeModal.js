@@ -85,9 +85,19 @@ const AddRecipeModal = () => {
                 onChange={handleChange}
               />
             </InputGroup>
+
             <InputGroup className="my-3">
               <InputGroup.Text>Image</InputGroup.Text>
               <Form.Control type="file" name="image" onChange={handleImage} />
+            </InputGroup>
+            <InputGroup className="my-3">
+              <InputGroup.Text>Description</InputGroup.Text>
+              <Form.Control
+                type="text"
+                placeholder="Recipe name here"
+                name="description"
+                onChange={handleChange}
+              />
             </InputGroup>
             <InputGroup className="my-3">
               <InputGroup.Text>Category</InputGroup.Text>
@@ -135,6 +145,8 @@ const AddRecipeModal = () => {
                   </button>
                 ))}
             </div>
+          </Modal.Body>
+          <div className="p-3">
             <div className="d-flex gap-3">
               <button
                 className="btn btn-secondary"
@@ -143,10 +155,8 @@ const AddRecipeModal = () => {
                 {showIngredient ? "Cancel ingredient" : "Add new ingredient"}
               </button>
             </div>
-          </Modal.Body>
-          <div>
             {showIngredient && (
-              <>
+              <div>
                 <InputGroup className="my-3">
                   <InputGroup.Text>Ingredient name</InputGroup.Text>
                   <Form.Control
@@ -171,6 +181,9 @@ const AddRecipeModal = () => {
                   ADD Ingredient
                 </button>
               </>
+
+              </div>
+
             )}
           </div>
 
