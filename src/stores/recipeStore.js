@@ -40,7 +40,13 @@ class RecipeStore {
       ...recipe,
       companion: this.getCompanion(recipe),
     }));
+
+    //newRecipe.forEach(recipe => recipe.category ? recipe.companion.append(this.getCategory(recipe.category))
     return newRecipes;
+  };
+
+  getCategory = (id) => {
+    return categoryStore.categories.find((category) => category._id === id);
   };
 
   getCompanion = (recipe) => {

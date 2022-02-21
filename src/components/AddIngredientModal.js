@@ -7,7 +7,7 @@ const AddIngredientModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [ingredient, setIngredient] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
-  const threshold = 0.01;
+  const threshold = 0.2;
 
   const options = { includeScore: true, keys: ["name"] };
   const ingredientFuse = new Fuse(ingredientStore.ingredients, options);
