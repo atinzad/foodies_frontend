@@ -16,7 +16,7 @@ class IngredientStore {
       const res = await instance.post("/ingredient", formData);
       const newIngredient = res.data.payload;
       this.ingredients = [...this.ingredients, newIngredient];
-      handleClose();
+      if (handleClose) handleClose();
     } catch (error) {
       console.log(error);
     }
