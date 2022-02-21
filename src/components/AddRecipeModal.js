@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { Form, InputGroup, Modal } from "react-bootstrap";
 import categoryStore from "../stores/categoryStore";
@@ -8,6 +9,8 @@ const AddRecipeModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [recipe, setRecipe] = useState(null);
   const [chosenIngredients, setChosenIngredients] = useState([]);
+  const [showIngredient, setShowIngredient] = useState(false);
+  console.log("showIngredient", showIngredient);
 
   const handleClose = () => setIsOpen(false);
   const handleShow = () => setIsOpen(true);
@@ -29,18 +32,20 @@ const AddRecipeModal = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("ing", chosenIngredients);
-    // setRecipe({ ...recipe, ingredients: chosenIngredients.slice() });
     setChosenIngredients([]);
     recipeStore.addRecipe(recipe, handleClose);
     setRecipe(null);
   };
 
+  const handleNewIngredient = (e) => {
+    console.log("showIngredient", showIngredient);
+    e.preventDefault();
+    showIngredient ? setShowIngredient(false) : setShowIngredient(true);
+  };
+
   useEffect(() => {
     setRecipe({ ...recipe, ingredients: chosenIngredients.slice() });
   }, [chosenIngredients]);
-
-  console.log("recipe:", recipe);
 
   return (
     <>
@@ -112,7 +117,35 @@ const AddRecipeModal = () => {
                   </button>
                 ))}
             </div>
+            <div className="d-flex gap-3">
+              <button
+                className="btn btn-secondary"
+                onClick={handleNewIngredient}
+              >
+                {showIngredient ? "Cancel ingredient" : "Add new ingredient"}
+              </button>
+            </div>
           </Modal.Body>
+          <div>
+            {showIngredient && (
+              <>
+                <InputGroup className="my-3">
+                  <InputGroup.Text>Ingredient name</InputGroup.Text>
+                  <Form.Control
+                    type="text"
+                    placeholder="Ingredient name here"
+                    name="ingredientName"
+                    onChange={handleChange}
+                  />
+                </InputGroup>
+                <InputGroup className="my-3">
+                  <InputGroup.Text>Ingredient image</InputGroup.Text>
+                  <Form.Control type="file" name="ingredientImage" />
+                </InputGroup>
+              </>
+            )}
+          </div>
+
           <Modal.Footer>
             <button type="submit" className="btn btn-outline-dark">
               ADD
@@ -124,4 +157,4 @@ const AddRecipeModal = () => {
   );
 };
 
-export default AddRecipeModal;
+export default observer(AddRecipeModal);
