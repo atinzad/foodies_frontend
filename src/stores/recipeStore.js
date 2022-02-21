@@ -31,6 +31,7 @@ class RecipeStore {
 
   getRecipe = async () => {
     const res = await instance.get("/recipe");
+    console.log("res in recipeStore", res.data.payload);
     this.recipes = res.data.payload;
   };
 }

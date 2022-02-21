@@ -13,7 +13,7 @@ import recipeStore from "../stores/recipeStore";
 import Fuse from "fuse.js";
 
 const Home = () => {
-  const [query, setQuery] = useState("des");
+  const [query, setQuery] = useState("");
 
   const options = { includeScore: false, keys: ["name"] };
   const categoryFuse = new Fuse(categoryStore.categories, options);
@@ -38,6 +38,8 @@ const Home = () => {
   const recipeList = recipeResult
     .map((recipe) => <RecipeItem key={recipe._id} recipe={recipe} />)
     .sort(() => Math.random() - 0.5);
+
+  console.log("recipeList in Home", recipeStore.recipes);
 
   const ingredientList = ingredientResult
     .map((ingredient) => (
