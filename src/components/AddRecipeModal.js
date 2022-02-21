@@ -10,7 +10,16 @@ const AddRecipeModal = () => {
   const [recipe, setRecipe] = useState(null);
   const [chosenIngredients, setChosenIngredients] = useState([]);
   const [showIngredient, setShowIngredient] = useState(false);
-  console.log("showIngredient", showIngredient);
+
+  const [ingredient, setIngredient] = useState(null);
+
+  const handleIngredientChange = (event) => {
+    setIngredient({ ...ingredient, [event.target.name]: event.target.value });
+  };
+
+  const handleIngredientImage = (event) => {
+    setRecipe({ ...ingredient, [event.target.name]: event.target.files[0] });
+  };
 
   const handleClose = () => setIsOpen(false);
   const handleShow = () => setIsOpen(true);
@@ -41,6 +50,15 @@ const AddRecipeModal = () => {
     console.log("showIngredient", showIngredient);
     e.preventDefault();
     showIngredient ? setShowIngredient(false) : setShowIngredient(true);
+  };
+
+  const handleSubmitNewIngredient = (e) => {
+    e.preventDefault();
+    console.log("added new ingredient");
+    console.log(ingredient);
+    ingredientStore.addIngredient(ingredient, null);
+    setIngredient(null);
+    setShowIngredient(false);
   };
 
   useEffect(() => {
@@ -134,14 +152,24 @@ const AddRecipeModal = () => {
                   <Form.Control
                     type="text"
                     placeholder="Ingredient name here"
-                    name="ingredientName"
-                    onChange={handleChange}
+                    name="name"
+                    onChange={handleIngredientChange}
                   />
                 </InputGroup>
                 <InputGroup className="my-3">
                   <InputGroup.Text>Ingredient image</InputGroup.Text>
-                  <Form.Control type="file" name="ingredientImage" />
+                  <Form.Control
+                    type="file"
+                    name="image"
+                    onChange={handleIngredientImage}
+                  />
                 </InputGroup>
+                <button
+                  className="btn btn-outline-dark"
+                  onClick={handleSubmitNewIngredient}
+                >
+                  ADD Ingredient
+                </button>
               </>
             )}
           </div>

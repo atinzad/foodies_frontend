@@ -51,14 +51,14 @@ class RecipeStore {
 
   getCompanion = (recipe) => {
     return recipe.ingredients
-      ? recipe.ingredients.map((id) => this.getIngredient(id))
+      ? recipe.ingredients.map((id) => this.getIngredient(id).name)
       : [];
   };
 
   getIngredient = (id) => {
     return ingredientStore.ingredients.find(
       (ingredient) => ingredient._id === id
-    ).name;
+    );
   };
 }
 
