@@ -26,7 +26,6 @@ const AddIngredientModal = () => {
     setIngredient({ ...ingredient, [event.target.name]: event.target.value });
     if (event.target.name === "name") {
       setSuggestions(ingredientFuse.search(event.target.value));
-      console.log("suggestions", suggestions[0].item.name);
     }
   };
 

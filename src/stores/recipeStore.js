@@ -23,7 +23,6 @@ class RecipeStore {
         formData
       );
       const newRecipe = res.data.payload;
-      console.log("newRecipe", newRecipe);
       this.recipes = [...this.recipes, newRecipe];
       handleClose();
     } catch (error) {
@@ -33,7 +32,6 @@ class RecipeStore {
 
   getRecipe = async () => {
     const res = await instance.get("/recipe");
-    console.log("res in recipeStore", res.data.payload);
     this.recipes = res.data.payload;
   };
 

@@ -32,7 +32,6 @@ const AddRecipeModal = () => {
     // console.log("ing", chosenIngredients);
     // setRecipe({ ...recipe, ingredients: chosenIngredients.slice() });
     setChosenIngredients([]);
-    console.log("object", recipe);
     recipeStore.addRecipe(recipe, handleClose);
     setRecipe(null);
   };

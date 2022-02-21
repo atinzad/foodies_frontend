@@ -40,8 +40,6 @@ const Home = () => {
     .map((recipe) => <RecipeItem key={recipe._id} recipe={recipe} />)
     .sort(() => Math.random() - 0.5);
 
-  console.log("recipeList in Home", recipeStore.recipes);
-
   const ingredientList = ingredientResult
     .map((ingredient) => (
       <IngredientItem key={ingredient._id} ingredient={ingredient} />
